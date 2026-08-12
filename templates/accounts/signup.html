@@ -1,101 +1,24 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
 
-{% block title %}Sign Up | Eventify{% endblock %}
+    <h1>Create Account</h1>
 
-{% block content %}
+    <form method="POST">
+        {% csrf_token %}
 
-<section class="auth-section">
+        {{ form.as_p }}
 
-    <div class="auth-card">
+        <button type="submit">Sign Up</button>
+    </form>
 
-        <h1>Create Account</h1>
+    <p>
+        Already have an account?
+        <a href="{% url 'accounts:login' %}">Login</a>
+    </p>
 
-        <p class="auth-subtitle">
-            Join Eventify and discover amazing events.
-        </p>
-
-        {% if form.errors %}
-            <div class="form-error">
-                Please correct the errors below.
-            </div>
-        {% endif %}
-
-        <form method="POST" class="auth-form">
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label for="id_username">Username</label>
-
-                <input
-                    type="text"
-                    name="username"
-                    id="id_username"
-                    placeholder="Choose a username"
-                    required
-                >
-
-                {% if form.username.errors %}
-                    <div class="field-error">
-                        {{ form.username.errors }}
-                    </div>
-                {% endif %}
-            </div>
-
-
-            <div class="form-group">
-                <label for="id_password1">Password</label>
-
-                <input
-                    type="password"
-                    name="password1"
-                    id="id_password1"
-                    placeholder="Create a password"
-                    required
-                >
-
-                {% if form.password1.errors %}
-                    <div class="field-error">
-                        {{ form.password1.errors }}
-                    </div>
-                {% endif %}
-            </div>
-
-
-            <div class="form-group">
-                <label for="id_password2">Confirm Password</label>
-
-                <input
-                    type="password"
-                    name="password2"
-                    id="id_password2"
-                    placeholder="Confirm your password"
-                    required
-                >
-
-                {% if form.password2.errors %}
-                    <div class="field-error">
-                        {{ form.password2.errors }}
-                    </div>
-                {% endif %}
-            </div>
-
-
-            <button type="submit" class="auth-button">
-                Create Account
-            </button>
-
-        </form>
-
-
-        <p class="auth-footer">
-            Already have an account?
-            <a href="{% url 'accounts:login' %}">
-                Login
-            </a>
-        </p>
-
-    </div>
-
-</section>
-
-{% endblock %}
+</body>
+</html>
