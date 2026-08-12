@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Cancel Booking | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+
+    <div class="booking-card cancel-card">
+
+        <h1>Cancel Booking?</h1>
+
+        {% if booking %}
+
+            <p>
+                Are you sure you want to cancel your booking for:
+            </p>
+
+            <h2>
+                {{ booking.event.title }}
+            </h2>
+
+            <div class="booking-details">
+
+                <div class="booking-item">
+                    <span>Date</span>
+                    <strong>
+                        {{ booking.event.date }}
+                    </strong>
+                </div>
+
+                <div class="booking-item">
+                    <span>Location</span>
+                    <strong>
+                        {{ booking.event.location }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="cancel-button">
+                    Yes, Cancel Booking
+                </button>
+
+                <a href="{% url 'bookings:booking_detail' booking.pk %}"
+                   class="booking-button secondary">
+                    Keep Booking
+                </a>
+
+            </form>
+
+        {% else %}
+
+            <p>Booking not found.</p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

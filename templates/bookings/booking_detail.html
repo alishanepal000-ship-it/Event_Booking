@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Booking Details | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+
+    <div class="booking-card">
+
+        <div class="booking-success">
+            Booking Confirmed
+        </div>
+
+        <h1>Booking Details</h1>
+
+
+        {% if booking %}
+
+            <div class="booking-details">
+
+                <div class="booking-item">
+                    <span>Event</span>
+                    <strong>
+                        {{ booking.event.title }}
+                    </strong>
+                </div>
+
+
+                <div class="booking-item">
+                    <span>Date</span>
+                    <strong>
+                        {{ booking.event.date }}
+                    </strong>
+                </div>
+
+
+                <div class="booking-item">
+                    <span>Location</span>
+                    <strong>
+                        {{ booking.event.location }}
+                    </strong>
+                </div>
+
+
+                <div class="booking-item">
+                    <span>Customer</span>
+                    <strong>
+                        {{ booking.user.username }}
+                    </strong>
+                </div>
+
+
+                {% if booking.quantity %}
+                    <div class="booking-item">
+                        <span>Tickets</span>
+                        <strong>
+                            {{ booking.quantity }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+
+                {% if booking.total_price %}
+                    <div class="booking-item">
+                        <span>Total Price</span>
+                        <strong>
+                            ${{ booking.total_price }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+
+                {% if booking.status %}
+                    <div class="booking-item">
+                        <span>Status</span>
+                        <strong>
+                            {{ booking.status }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+
+                {% if booking.created_at %}
+                    <div class="booking-item">
+                        <span>Booked On</span>
+                        <strong>
+                            {{ booking.created_at|date:"F d, Y H:i" }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="booking-actions">
+
+                <a href="{% url 'bookings:booking_list' %}"
+                   class="booking-button">
+                    My Bookings
+                </a>
+
+                <a href="{% url 'events:event_list' %}"
+                   class="booking-button secondary">
+                    Browse Events
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <p>Booking information could not be found.</p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

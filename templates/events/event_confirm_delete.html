@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Event | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="event-delete-section">
+
+    <div class="delete-card">
+
+        <h1>Delete Event?</h1>
+
+        {% if event %}
+
+            <p>
+                Are you sure you want to delete:
+            </p>
+
+            <h2>{{ event.title }}</h2>
+
+            <div class="delete-info">
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ event.date }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ event.location }}
+                </p>
+
+            </div>
+
+
+            <p class="warning">
+                This action cannot be undone.
+            </p>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="delete-button"
+                >
+                    Yes, Delete Event
+                </button>
+
+
+                <a
+                    href="{% url 'events:event_detail' event.pk %}"
+                    class="event-button secondary"
+                >
+                    Cancel
+                </a>
+
+            </form>
+
+        {% else %}
+
+            <p>Event not found.</p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

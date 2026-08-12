@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <p class="hero-label">
+            DISCOVER • CONNECT • EXPERIENCE
+        </p>
+
+        <h1>
+            Find Your Next
+            <span>Unforgettable Event</span>
+        </h1>
+
+        <p>
+            Discover amazing events, connect with people,
+            and create memories that last a lifetime.
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="{% url 'events:event_list' %}"
+                class="hero-button"
+            >
+                Explore Events
+            </a>
+
+
+            {% if not user.is_authenticated %}
+
+                <a
+                    href="{% url 'accounts:signup' %}"
+                    class="hero-button secondary"
+                >
+                    Get Started
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="home-events-section">
+
+    <div class="page-heading">
+
+        <h2>Upcoming Events</h2>
+
+        <p>
+            Explore what's happening next.
+        </p>
+
+    </div>
+
+
+    {% if events %}
+
+        <div class="events-grid">
+
+            {% for event in events|slice:":3" %}
+
+                <article class="event-card">
+
+                    {% if event.image %}
+
+                        <img
+                            src="{{ event.image.url }}"
+                            alt="{{ event.title }}"
+                            class="event-image"
+                        >
+
+                    {% else %}
+
+                        <div class="event-image-placeholder">
+                            <span>Event</span>
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="event-card-content">
+
+                        <h3>{{ event.title }}</h3>
+
+                        <p>
+                            {{ event.description|truncatewords:15 }}
+                        </p>
+
+                        <p>
+                            <strong>{{ event.date }}</strong>
+                        </p>
+
+                        <a
+                            href="{% url 'events:event_detail' event.pk %}"
+                            class="event-button"
+                        >
+                            View Event
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="center-action">
+
+            <a
+                href="{% url 'events:event_list' %}"
+                class="event-button"
+            >
+                View All Events
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-events">
+
+            <h3>No upcoming events</h3>
+
+            <p>
+                Check back soon for new events.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

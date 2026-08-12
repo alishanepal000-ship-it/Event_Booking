@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Join Eventify and discover amazing events.
+        </p>
+
+        {% if form.errors %}
+            <div class="form-error">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_username">Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="id_username"
+                    placeholder="Choose a username"
+                    required
+                >
+
+                {% if form.username.errors %}
+                    <div class="field-error">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="id_password1">Password</label>
+
+                <input
+                    type="password"
+                    name="password1"
+                    id="id_password1"
+                    placeholder="Create a password"
+                    required
+                >
+
+                {% if form.password1.errors %}
+                    <div class="field-error">
+                        {{ form.password1.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="id_password2">Confirm Password</label>
+
+                <input
+                    type="password"
+                    name="password2"
+                    id="id_password2"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+                {% if form.password2.errors %}
+                    <div class="field-error">
+                        {{ form.password2.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <button type="submit" class="auth-button">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="auth-footer">
+            Already have an account?
+            <a href="{% url 'accounts:login' %}">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

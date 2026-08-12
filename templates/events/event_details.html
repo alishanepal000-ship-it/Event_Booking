@@ -1,0 +1,146 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }} | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="event-detail-section">
+
+    <div class="event-detail-card">
+
+        {% if event.image %}
+
+            <img
+                src="{{ event.image.url }}"
+                alt="{{ event.title }}"
+                class="event-detail-image"
+            >
+
+        {% endif %}
+
+
+        <div class="event-detail-content">
+
+            <h1>{{ event.title }}</h1>
+
+            <p class="event-description">
+                {{ event.description }}
+            </p>
+
+
+            <div class="event-detail-info">
+
+                <div class="detail-item">
+                    <span>Date</span>
+                    <strong>{{ event.date }}</strong>
+                </div>
+
+
+                {% if event.start_time %}
+                    <div class="detail-item">
+                        <span>Start Time</span>
+                        <strong>{{ event.start_time }}</strong>
+                    </div>
+                {% endif %}
+
+
+                {% if event.end_time %}
+                    <div class="detail-item">
+                        <span>End Time</span>
+                        <strong>{{ event.end_time }}</strong>
+                    </div>
+                {% endif %}
+
+
+                <div class="detail-item">
+                    <span>Location</span>
+                    <strong>{{ event.location }}</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Price</span>
+                    <strong>${{ event.price }}</strong>
+                </div>
+
+
+                {% if event.capacity %}
+                    <div class="detail-item">
+                        <span>Capacity</span>
+                        <strong>{{ event.capacity }}</strong>
+                    </div>
+                {% endif %}
+
+
+                {% if event.organizer %}
+                    <div class="detail-item">
+                        <span>Organizer</span>
+                        <strong>{{ event.organizer }}</strong>
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="event-actions">
+
+                {% if user.is_authenticated %}
+
+                    <a
+                        href="{% url 'bookings:booking_form' event.pk %}"
+                        class="event-button"
+                    >
+                        Book Now
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'accounts:login' %}"
+                        class="event-button"
+                    >
+                        Login to Book
+                    </a>
+
+                {% endif %}
+
+
+                <a
+                    href="{% url 'events:event_list' %}"
+                    class="event-button secondary"
+                >
+                    Back to Events
+                </a>
+
+            </div>
+
+
+            {% if user == event.organizer %}
+
+                <div class="organizer-actions">
+
+                    <a
+                        href="{% url 'events:event_update' event.pk %}"
+                    >
+                        Edit Event
+                    </a>
+
+                    <a
+                        href="{% url 'events:event_delete' event.pk %}"
+                    >
+                        Delete Event
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

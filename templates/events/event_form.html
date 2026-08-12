@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="event-form-section">
+
+    <div class="form-card">
+
+        <h1>
+            {% if event %}
+                Edit Event
+            {% else %}
+                Create Event
+            {% endif %}
+        </h1>
+
+        <p class="form-subtitle">
+            {% if event %}
+                Update your event information.
+            {% else %}
+                Create a new event and share it with others.
+            {% endif %}
+        </p>
+
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {% if form %}
+
+                {{ form.as_p }}
+
+            {% else %}
+
+                <div class="form-group">
+
+                    <label for="id_title">
+                        Event Title
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        id="id_title"
+                        placeholder="Enter event title"
+                        value="{{ event.title|default:'' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="id_description">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        id="id_description"
+                        rows="5"
+                        placeholder="Describe your event"
+                        required
+                    >{{ event.description|default:'' }}</textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="id_date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            id="id_date"
+                            value="{{ event.date|date:'Y-m-d' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="id_location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            id="id_location"
+                            placeholder="Event location"
+                            value="{{ event.location|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="id_start_time">
+                            Start Time
+                        </label>
+
+                        <input
+                            type="time"
+                            name="start_time"
+                            id="id_start_time"
+                            value="{{ event.start_time|time:'H:i' }}"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="id_end_time">
+                            End Time
+                        </label>
+
+                        <input
+                            type="time"
+                            name="end_time"
+                            id="id_end_time"
+                            value="{{ event.end_time|time:'H:i' }}"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="id_price">
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            name="price"
+                            id="id_price"
+                            step="0.01"
+                            min="0"
+                            value="{{ event.price|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="id_capacity">
+                            Capacity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="capacity"
+                            id="id_capacity"
+                            min="1"
+                            value="{{ event.capacity|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="id_image">
+                        Event Image
+                    </label>
+
+                    <input
+                        type="file"
+                        name="image"
+                        id="id_image"
+                        accept="image/*"
+                    >
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="event-button"
+                >
+                    {% if event %}
+                        Update Event
+                    {% else %}
+                        Create Event
+                    {% endif %}
+                </button>
+
+
+                <a
+                    href="{% url 'events:event_list' %}"
+                    class="event-button secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
