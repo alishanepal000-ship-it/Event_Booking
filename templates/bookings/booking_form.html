@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Book Event | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+
+    <div class="booking-card">
+
+        <h1>Book Event</h1>
+
+        {% if event %}
+            <div class="event-summary">
+
+                <h2>{{ event.title }}</h2>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ event.date }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ event.location }}
+                </p>
+
+                <p>
+                    <strong>Price:</strong>
+                    ${{ event.price }}
+                </p>
+
+            </div>
+        {% endif %}
+
+
+        <form method="POST" class="booking-form">
+
+            {% csrf_token %}
+
+            {% if form %}
+                {{ form.as_p }}
+            {% else %}
+
+                <div class="form-group">
+                    <label for="id_quantity">
+                        Number of Tickets
+                    </label>
+
+                    <input
+                        type="number"
+                        name="quantity"
+                        id="id_quantity"
+                        value="1"
+                        min="1"
+                        required
+                    >
+                </div>
+
+            {% endif %}
+
+
+            <button type="submit" class="booking-button">
+                Confirm Booking
+            </button>
+
+        </form>
+
+
+        <a href="{% url 'events:event_list' %}">
+            Back to Events
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Events | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="events-section">
+
+    <div class="page-heading">
+        <h1>Discover Events</h1>
+        <p>Find exciting events and create unforgettable memories.</p>
+    </div>
+
+    {% if events %}
+
+        <div class="events-grid">
+
+            {% for event in events %}
+
+                <article class="event-card">
+
+                    {% if event.image %}
+                        <img
+                            src="{{ event.image.url }}"
+                            alt="{{ event.title }}"
+                            class="event-image"
+                        >
+                    {% else %}
+                        <div class="event-image-placeholder">
+                            <span>No Image</span>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="event-card-content">
+
+                        <h2>{{ event.title }}</h2>
+
+                        <p class="event-description">
+                            {{ event.description|truncatewords:20 }}
+                        </p>
+
+                        <div class="event-info">
+
+                            <p>
+                                <strong>Date:</strong>
+                                {{ event.date }}
+                            </p>
+
+                            {% if event.start_time %}
+                                <p>
+                                    <strong>Time:</strong>
+                                    {{ event.start_time }}
+
+                                    {% if event.end_time %}
+                                        - {{ event.end_time }}
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+
+                            <p>
+                                <strong>Location:</strong>
+                                {{ event.location }}
+                            </p>
+
+                            <p>
+                                <strong>Price:</strong>
+                                ${{ event.price }}
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'events:event_detail' event.pk %}"
+                            class="event-button"
+                        >
+                            View Details
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-events">
+
+            <h2>No Events Available</h2>
+
+            <p>
+                There are currently no events available.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
