@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                {{ user.username|first|upper }}
+            </div>
+
+            <div>
+                <h1>{{ user.username }}</h1>
+
+                <p>Eventify Member</p>
+            </div>
+
+        </div>
+
+
+        <div class="profile-details">
+
+            <div class="profile-item">
+                <span>Username</span>
+                <strong>{{ user.username }}</strong>
+            </div>
+
+            <div class="profile-item">
+                <span>Email</span>
+
+                {% if user.email %}
+                    <strong>{{ user.email }}</strong>
+                {% else %}
+                    <strong>No email provided</strong>
+                {% endif %}
+
+            </div>
+
+            <div class="profile-item">
+                <span>Member Since</span>
+                <strong>{{ user.date_joined|date:"F d, Y" }}</strong>
+            </div>
+
+            <div class="profile-item">
+                <span>Last Login</span>
+
+                {% if user.last_login %}
+                    <strong>
+                        {{ user.last_login|date:"F d, Y H:i" }}
+                    </strong>
+                {% else %}
+                    <strong>First login</strong>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-actions">
+
+            <a href="{% url 'events:event_list' %}"
+               class="profile-button">
+                Browse Events
+            </a>
+
+            <a href="{% url 'bookings:booking_list' %}"
+               class="profile-button secondary">
+                My Bookings
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

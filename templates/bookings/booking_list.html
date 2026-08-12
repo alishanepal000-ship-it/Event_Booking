@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings | Eventify{% endblock %}
+
+{% block content %}
+
+<section class="bookings-section">
+
+    <div class="page-heading">
+
+        <h1>My Bookings</h1>
+
+        <p>
+            View and manage your event bookings.
+        </p>
+
+    </div>
+
+
+    {% if bookings %}
+
+        <div class="booking-list">
+
+            {% for booking in bookings %}
+
+                <div class="booking-card">
+
+                    <div class="booking-card-content">
+
+                        <h2>
+                            {{ booking.event.title }}
+                        </h2>
+
+                        <p>
+                            <strong>Date:</strong>
+                            {{ booking.event.date }}
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            {{ booking.event.location }}
+                        </p>
+
+
+                        {% if booking.quantity %}
+                            <p>
+                                <strong>Tickets:</strong>
+                                {{ booking.quantity }}
+                            </p>
+                        {% endif %}
+
+
+                        {% if booking.total_price %}
+                            <p>
+                                <strong>Total:</strong>
+                                ${{ booking.total_price }}
+                            </p>
+                        {% endif %}
+
+
+                        {% if booking.status %}
+                            <p>
+                                <strong>Status:</strong>
+                                {{ booking.status }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="booking-card-actions">
+
+                        <a href="{% url 'bookings:booking_detail' booking.pk %}">
+                            View Details
+                        </a>
+
+                        <a href="{% url 'bookings:booking_cancel' booking.pk %}">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-bookings">
+
+            <h2>No bookings yet</h2>
+
+            <p>
+                You haven't booked any events yet.
+            </p>
+
+            <a href="{% url 'events:event_list' %}"
+               class="booking-button">
+                Browse Events
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
