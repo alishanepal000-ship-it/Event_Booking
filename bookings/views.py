@@ -13,6 +13,24 @@ def booking_create(request, event_id):
 
     event = get_object_or_404(Event, pk=event_id)
 
+    # Check if this user already has an active booking
+    existing_booking = Booking.objects.filter(
+        user=request.user,
+        event=event,
+        status="confirmed"
+    ).first()
+
+    if existing_booking:
+        messages.warning(
+            request,
+            "You already have a booking for this event."
+        )
+
+        return redirect(
+            "bookings:booking_detail",
+            pk=existing_booking.pk
+        )
+
     if request.method == "POST":
 
         form = BookingForm(
@@ -57,8 +75,10 @@ def booking_create(request, event_id):
 @login_required
 def booking_list(request):
 
+    # Show only confirmed bookings
     bookings = Booking.objects.filter(
-        user=request.user
+        user=request.user,
+        status="confirmed"
     ).select_related("event")
 
     return render(
@@ -97,9 +117,22 @@ def booking_cancel(request, pk):
         user=request.user
     )
 
+    # Prevent cancelling an already cancelled booking
+    if booking.status == "cancelled":
+
+        messages.info(
+            request,
+            "This booking has already been cancelled."
+        )
+
+        return redirect(
+            "bookings:booking_list"
+        )
+
     if request.method == "POST":
 
         booking.status = "cancelled"
+
         booking.save()
 
         messages.success(

@@ -1,14 +1,40 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Events | Eventify{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/event_list.css' %}">
+{% endblock %}
 
 {% block content %}
 
 <section class="events-section">
 
     <div class="page-heading">
+        <p class="section-label">DISCOVER • CONNECT • EXPERIENCE</p>
         <h1>Discover Events</h1>
         <p>Find exciting events and create unforgettable memories.</p>
+    </div>
+
+    <div class="category-nav">
+
+        <a
+            href="{% url 'events:event_list' %}"
+            class="category-link {% if not selected_category %}active{% endif %}"
+        >
+            All Events
+        </a>
+
+        {% for category in categories %}
+            <a
+                href="?category={{ category.id }}"
+                class="category-link {% if selected_category == category.id|stringformat:'s' %}active{% endif %}"
+            >
+                {{ category.name }}
+            </a>
+        {% endfor %}
+
     </div>
 
     {% if events %}
@@ -19,57 +45,54 @@
 
                 <article class="event-card">
 
-                    {% if event.image %}
-                        <img
-                            src="{{ event.image.url }}"
-                            alt="{{ event.title }}"
-                            class="event-image"
-                        >
-                    {% else %}
-                        <div class="event-image-placeholder">
-                            <span>No Image</span>
-                        </div>
-                    {% endif %}
+                    <div class="event-image-wrapper">
 
+                        {% if event.image %}
+                            <img
+                                src="{{ event.image.url }}"
+                                alt="{{ event.title }}"
+                                class="event-image"
+                            >
+                        {% else %}
+                            <div class="event-image-placeholder">
+                                EVENT
+                            </div>
+                        {% endif %}
+
+                        {% if event.category %}
+                            <span class="event-category">
+                                {{ event.category.name }}
+                            </span>
+                        {% endif %}
+
+                    </div>
 
                     <div class="event-card-content">
 
                         <h2>{{ event.title }}</h2>
 
                         <p class="event-description">
-                            {{ event.description|truncatewords:20 }}
+                            {{ event.description|truncatewords:18 }}
                         </p>
 
                         <div class="event-info">
 
-                            <p>
-                                <strong>Date:</strong>
-                                {{ event.date }}
-                            </p>
+                            <div class="info-item">
+                                <span>Date</span>
+                                <strong>{{ event.date }}</strong>
+                            </div>
 
-                            {% if event.start_time %}
-                                <p>
-                                    <strong>Time:</strong>
-                                    {{ event.start_time }}
+                            <div class="info-item">
+                                <span>Location</span>
+                                <strong>{{ event.location }}</strong>
+                            </div>
 
-                                    {% if event.end_time %}
-                                        - {{ event.end_time }}
-                                    {% endif %}
-                                </p>
-                            {% endif %}
-
-                            <p>
-                                <strong>Location:</strong>
-                                {{ event.location }}
-                            </p>
-
-                            <p>
-                                <strong>Price:</strong>
-                                ${{ event.price }}
-                            </p>
+                            <div class="info-item">
+                                <span>Price</span>
+                                <strong>${{ event.price }}</strong>
+                            </div>
 
                         </div>
-
 
                         <a
                             href="{% url 'events:event_detail' event.pk %}"
@@ -89,13 +112,8 @@
     {% else %}
 
         <div class="empty-events">
-
             <h2>No Events Available</h2>
-
-            <p>
-                There are currently no events available.
-            </p>
-
+            <p>There are currently no events available.</p>
         </div>
 
     {% endif %}

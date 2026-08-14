@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Cancel Booking | Eventify{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/booking_confirm_cancle.css' %}">
+{% endblock %}
 
 {% block content %}
 

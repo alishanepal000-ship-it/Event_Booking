@@ -1,0 +1,119 @@
+.booking-section {
+    min-height: 70vh;
+    padding: 70px 20px;
+    background: #f7f7f7;
+}
+
+.booking-card {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.booking-card h1 {
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.event-summary {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: #f5f3ff;
+    border-radius: 12px;
+}
+
+.event-summary h2 {
+    margin-bottom: 20px;
+}
+
+.event-summary p {
+    margin: 10px 0;
+}
+
+.booking-form {
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.booking-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #6c5ce7;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.booking-button:hover {
+    background: #5849d6;
+}
+
+.booking-card > a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #6c5ce7;
+    text-decoration: none;
+}
+
+.booking-card > a:hover {
+    text-decoration: underline;
+}
+
+/* Quantity field */
+
+.booking-form p {
+    margin: 0 0 25px;
+}
+
+.booking-form p label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
+
+.booking-form p input[type="number"] {
+    width: 150px;
+    height: 46px;
+    padding: 0 14px;
+    box-sizing: border-box;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+
+    background: #fff;
+    color: #222;
+    font-size: 16px;
+
+    outline: none;
+}
+
+.booking-form p input[type="number"]:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+}

@@ -1,0 +1,585 @@
+/* =========================================
+EVENTIFY HOME PAGE
+========================================= */
+
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 70%,
+            rgba(108, 44, 255, 0.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 30%,
+            rgba(236, 72, 153, 0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #fcfbff,
+            #f5efff
+        );
+}
+
+/* Decorative circles */
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    top: -280px;
+    right: 20%;
+
+    border-radius: 50%;
+
+    background: rgba(215, 198, 255, 0.35);
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    left: -150px;
+    bottom: -170px;
+
+    border-radius: 50%;
+
+    background: rgba(108, 44, 255, 0.08);
+}
+
+
+/* =========================================
+HERO CONTENT
+========================================= */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 700px;
+}
+
+.hero-label {
+    margin-bottom: 18px;
+
+    color: #6c2cff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+.hero-content h1 {
+    margin: 0 0 25px;
+
+    color: #20203a;
+
+    font-size: clamp(45px, 5vw, 68px);
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    font-weight: 800;
+}
+
+.hero-content h1 span {
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6676ff,
+            #7137e8,
+            #a22bc9
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content > p:not(.hero-label) {
+    max-width: 600px;
+
+    margin-bottom: 32px;
+
+    color: #5d5d72;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+HERO BUTTONS
+========================================= */
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding: 0 27px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6426ed,
+            #8b42f4
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow:
+        0 12px 28px rgba(108, 44, 255, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+.hero-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 35px rgba(108, 44, 255, 0.35);
+}
+
+.hero-button.secondary {
+    background: #ffffff;
+
+    color: #6c2cff;
+
+    border: 1px solid #ded2ff;
+
+    box-shadow:
+        0 7px 20px rgba(50, 30, 90, 0.08);
+}
+
+.hero-button.secondary:hover {
+    background: #f5efff;
+
+    border-color: #c7b4ff;
+}
+
+
+/* =========================================
+EVENTS SECTION
+========================================= */
+
+.home-events-section {
+    position: relative;
+
+    padding: 70px 8%;
+
+    background: #ffffff;
+
+    overflow: hidden;
+}
+
+.home-events-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    left: -120px;
+    top: 80px;
+
+    border-radius: 50%;
+
+    background: #f0e9ff;
+}
+
+.home-events-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -100px;
+    bottom: 30px;
+
+    border-radius: 50%;
+
+    background: #faeafa;
+}
+
+
+/* =========================================
+SECTION HEADING
+========================================= */
+
+.page-heading {
+    position: relative;
+    z-index: 2;
+
+    margin-bottom: 30px;
+}
+
+.page-heading h2 {
+    margin: 0 0 8px;
+
+    color: #20203a;
+
+    font-size: 30px;
+    font-weight: 750;
+}
+
+.page-heading h2::after {
+    content: "";
+
+    display: block;
+
+    width: 27px;
+    height: 3px;
+
+    margin-top: 9px;
+
+    border-radius: 5px;
+
+    background: #6c2cff;
+}
+
+.page-heading p {
+    margin: 0;
+
+    color: #77778b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+EVENTS GRID
+========================================= */
+
+.events-grid {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+
+/* =========================================
+EVENT CARD
+========================================= */
+
+.event-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #ebe8f5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(45, 25, 90, 0.07);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(45, 25, 90, 0.14);
+}
+
+
+/* =========================================
+EVENT IMAGE
+========================================= */
+
+.event-image,
+.event-image-placeholder {
+    display: block;
+
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+}
+
+.event-image-placeholder {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6426ed,
+            #a33edb
+        );
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+EVENT CARD CONTENT
+========================================= */
+
+.event-card-content {
+    padding: 22px;
+}
+
+.event-card-content h3 {
+    margin: 0 0 10px;
+
+    color: #20203a;
+
+    font-size: 19px;
+    line-height: 1.3;
+}
+
+.event-card-content p {
+    margin: 0 0 12px;
+
+    color: #77778b;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.event-card-content strong {
+    color: #6c2cff;
+}
+
+
+/* =========================================
+EVENT BUTTON
+========================================= */
+
+.event-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 17px;
+
+    border-radius: 8px;
+
+    background: #f1eaff;
+
+    color: #6c2cff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.event-button:hover {
+    background: #6c2cff;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+VIEW ALL BUTTON
+========================================= */
+
+.center-action {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 35px;
+}
+
+.center-action .event-button {
+    padding: 0 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9c8ff;
+}
+
+.center-action .event-button:hover {
+    background: #6c2cff;
+
+    border-color: #6c2cff;
+}
+
+
+/* =========================================
+EMPTY EVENTS
+========================================= */
+
+.empty-events {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 170px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #ebe8f5;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(45, 25, 90, 0.07);
+}
+
+.empty-events::before {
+    content: "📅";
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    margin-bottom: 13px;
+
+    border-radius: 50%;
+
+    background: #f1eaff;
+
+    font-size: 21px;
+}
+
+.empty-events h3 {
+    margin: 0 0 5px;
+
+    color: #20203a;
+
+    font-size: 17px;
+}
+
+.empty-events p {
+    margin: 0;
+
+    color: #77778b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .hero-section {
+        padding: 70px 6%;
+    }
+
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .hero-section {
+        min-height: auto;
+
+        padding: 60px 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .hero-content > p:not(.hero-label) {
+        font-size: 15px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hero-button {
+        width: 100%;
+    }
+
+    .home-events-section {
+        padding: 55px 5%;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-image,
+    .event-image-placeholder {
+        height: 220px;
+    }
+
+}

@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Home | Eventify{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -55,10 +61,10 @@
 
     <div class="page-heading">
 
-        <h2>Upcoming Events</h2>
+        <h2>Don’t Miss What’s Happening</h2>
 
         <p>
-            Explore what's happening next.
+            Discover experiences worth showing up for.
         </p>
 
     </div>
@@ -121,8 +127,7 @@
 
             <a
                 href="{% url 'events:event_list' %}"
-                class="event-button"
-            >
+                class="event-button">
                 View All Events
             </a>
 

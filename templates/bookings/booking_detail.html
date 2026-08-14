@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Booking Details | Eventify{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/booking_detail.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -96,12 +102,12 @@
             <div class="booking-actions">
 
                 <a href="{% url 'bookings:booking_list' %}"
-                   class="booking-button">
+                    class="booking-button">
                     My Bookings
                 </a>
 
                 <a href="{% url 'events:event_list' %}"
-                   class="booking-button secondary">
+                    class="booking-button secondary">
                     Browse Events
                 </a>
 

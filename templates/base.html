@@ -42,8 +42,8 @@
                     </a>
 
                     <form method="POST"
-                          action="{% url 'accounts:logout' %}"
-                          class="logout-form">
+                        action="{% url 'accounts:logout' %}"
+                        class="logout-form">
                         {% csrf_token %}
                         <button type="submit" class="nav-button">
                             Logout
@@ -57,7 +57,7 @@
                     </a>
 
                     <a href="{% url 'accounts:signup' %}"
-                       class="signup-button">
+                        class="signup-button">
                         Sign Up
                     </a>
 
