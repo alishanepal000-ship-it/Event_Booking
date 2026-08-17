@@ -1,16 +1,85 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Welcome, {{ user.username }}!</h1>
+{% load static %}
 
-    <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
+{% block title %}Profile | Eventify{% endblock %}
 
-    <a href="{% url 'accounts:logout' %}">Logout</a>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                {{ user.username|first|upper }}
+            </div>
+
+            <h1>
+                Welcome, {{ user.username }}!
+            </h1>
+
+            <p>
+                Your Eventify profile
+            </p>
+
+        </div>
+
+
+        <div class="profile-details">
+
+            <div class="profile-item">
+                <span>Username</span>
+
+                <strong>
+                    {{ user.username }}
+                </strong>
+            </div>
+
+
+            <div class="profile-item">
+                <span>Email</span>
+
+                <strong>
+                    {% if user.email %}
+                        {{ user.email }}
+                    {% else %}
+                        Not provided
+                    {% endif %}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="profile-actions">
+
+            <a href="{% url 'bookings:booking_list' %}"
+                class="profile-button">
+                My Bookings
+            </a>
+
+            <form method="POST"
+                    action="{% url 'accounts:logout' %}">
+
+                {% csrf_token %}
+
+                <button type="submit"
+                        class="profile-button logout-button">
+                    Logout
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

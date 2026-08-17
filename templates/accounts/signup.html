@@ -1,24 +1,86 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sign Up</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Create Account</h1>
+{% load static %}
 
-    <form method="POST">
-        {% csrf_token %}
+{% block title %}Sign Up | Eventify{% endblock %}
 
-        {{ form.as_p }}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
 
-        <button type="submit">Sign Up</button>
-    </form>
+{% block content %}
 
-    <p>
-        Already have an account?
-        <a href="{% url 'accounts:login' %}">Login</a>
-    </p>
+<section class="auth-section">
 
-</body>
-</html>
+    <div class="auth-card">
+
+        <div class="auth-header">
+
+            <h1>Create Account</h1>
+
+            <p class="auth-subtitle">
+                Join Eventify and start discovering amazing events.
+            </p>
+
+        </div>
+
+
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    {{ field.label_tag }}
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small class="help-text">
+                            {{ field.help_text }}
+                        </small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+
+            <button type="submit" class="auth-button">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            <span>Already have an account?</span>
+
+            <a href="{% url 'accounts:login' %}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
